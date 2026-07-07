@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:15-alpine
+    container_name: turnosar-db
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-admin123}
+      POSTGRES_DB: ${DB_NAME:-turnos_medicos_db}
+    ports:
+      - "5433:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - turnosar-network
+
+  app:
+    build: .
+    container_name: turnosar-app
+    restart: always
+    ports:
+      - "3001:3001"
+      - "5173:5173"
+    environment:
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD:-admin123}
+      - DB_NAME=${DB_NAME:-turnos_medicos_db}
+      - DB_HOST=db
+      - DB_PORT=5432
+      - JWT_SECRET=${JWT_SECRET:-turnosar_secret_key_2024_development}
+      - PORT=3001
+    depends_on:
+      - db
+    networks:
+      - turnosar-network
+
+volumes:
+  db_data:
+
+networks:
+  turnosar-network:
+    driver: bridge

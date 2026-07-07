@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+  --color-white: #ffffff;
+}
+
+
+@layer base {
+  /* Personalización del diseño base */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+  }
+  
+  /* Optimizaciones responsive globales */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  /* Mejoras para inputs en móviles */
+  input, textarea, select {
+    font-size: 16px; /* Previene zoom en iOS */
+  }
+  
+  @media (max-width: 640px) {
+    input, textarea, select {
+      font-size: 16px;
+    }
+  }
+  
+  /* Botones táctiles optimizados */
+  button, [role="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Mejoras de scroll suave */
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  /* Optimizaciones para pantallas pequeñas */
+  @media (max-width: 640px) {
+    .container {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+}
+
+@layer components {
+  /* Componentes responsive reutilizables */
+  .mobile-button {
+    @apply min-h-[48px] min-w-[48px] flex items-center justify-center px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 active:scale-95;
+  }
+  
+  .mobile-input {
+    @apply w-full px-4 py-3 text-base border border-gray-300 dark:border-slate-600 rounded-lg bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-300 focus:border-blue-500 min-h-[48px];
+  }
+  
+  .mobile-card {
+    @apply bg-white dark:bg-slate-800 rounded-xl shadow-lg dark:shadow-2xl p-4 sm:p-6 border dark:border-slate-700;
+  }
+  
+  .mobile-header {
+    @apply text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white;
+  }
+  
+  .mobile-text {
+    @apply text-sm sm:text-base text-gray-700 dark:text-gray-300;
+  }
+  
+  .mobile-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .mobile-grid {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8;
+  }
+  
+  .mobile-section {
+    @apply py-8 sm:py-12 lg:py-16;
+  }
+}
+
+@layer utilities {
+  /* Utilidades adicionales personalizadas */
+  .bg-custom-blue {
+    background-color: #1e40af;
+  }
+
+  .text-custom-celeste {
+    color: #38bdf8;
+  }
+
+  .rounded-lg {
+    border-radius: 1rem;
+  }
+}
+
+/* Estilos para react-phone-input-2 */
+.react-tel-input .form-control {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.react-tel-input .flag-dropdown {
+  border: none !important;
+  background-color: transparent !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.react-tel-input .selected-flag {
+  background-color: transparent !important;
+  padding: 0 12px 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 100% !important;
+}
+
+.react-tel-input .selected-flag .flag {
+  margin-top: 0 !important;
+  position: relative !important;
+  top: 0 !important;
+}
+
+/* Modo oscuro para PhoneInput */
+.dark .react-tel-input .selected-flag:hover,
+.dark .react-tel-input .selected-flag.open {
+  background-color: #334155 !important; /* slate-700 */
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .factura-print-area, .factura-print-area * {
+    visibility: visible;
+  }
+  .factura-print-area {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+  }
+}

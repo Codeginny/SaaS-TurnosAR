@@ -1,0 +1,34 @@
+/* index.css */
+
+/* Importar las capas de Tailwind */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  /* Personalización del diseño base */
+  body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f0f4f8;
+  }
+}
+
+@layer components {
+  
+}
+
+@layer utilities {
+  /* Utilidades adicionales personalizadas */
+  .bg-custom-blue {
+    background-color: #1e40af;
+  }
+
+  .text-custom-celeste {
+    color: #38bdf8;
+  }
+
+  .rounded-lg {
+    border-radius: 1rem;
+  }
+}
