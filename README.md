@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # TurnosAR SaaS — Gestión de Consultorios, Facturación ARCA/AFIP y Business Intelligence Médico
 
 ## 1. Descripción del Sistema y Propósito de Negocio
@@ -218,149 +217,9 @@ Para garantizar un margen de rentabilidad óptimo en un entorno SaaS real, se ev
    └─► Contenedor 4: Base de Datos PostgreSQL (Supabase Cloud en puerto 6543)
 ```
 
-## 11. Línea de Desarrollo Futura (Roadmap)
-
-**Fase 1: Automatización Avanzada (Próximo Sprint)**
-- **Notificaciones Push por WhatsApp:** Integración con la API de Twilio para enviar recordatorios dinámicos de citas 24 horas antes, disminuyendo el ausentismo un 15% adicional.
-- **Pasarela de Pago de Aranceles (Copagos):** Integración con MercadoPago o Stripe para cobros inmediatos de seña y validaciones de tarjetas en tiempo real.
-
-**Fase 2: Inteligencia de Negocios y Optimización de Capacidad (SaaS Advanced)**
-- **Motor de Sobreturnos Inteligente:** Algoritmo predictivo de Machine Learning que asigne sobreturnos automáticamente analizando la tasa de ausentismo histórica del día de la semana y especialidad del médico.
-- **Módulo Whitelabel Premium:** Ocultamiento total de la marca de TurnosAR y uso de subdominios personalizados (`clinica.turnosar.com`) para planes Enterprise.
-
-## 12. Autoría
-
-- **Desarrolladora principal:** Virginia Alejandra Ponce
-- **Tecnologías:** React 18, Node.js, Express, PostgreSQL, Playwright, Tailwind CSS.
-- **LinkedIn:** [https://www.linkedin.com/in/poncevirginialej/](https://www.linkedin.com/in/poncevirginialej/)
-- **Ubicación:** Argentina (Catamarca).
-=======
-# Sistema de Turnos Médicos AR (TurnosAR)
-
-## Descripción
-
-TurnosAR es una plataforma web que desarrollé para gestionar turnos médicos en Argentina. La idea surgió porque veo que muchos consultorios siguen usando agendas de papel o sistemas muy básicos, y los pacientes tienen que llamar o ir personalmente para sacar turnos.
-
-La aplicación está pensada para que tanto los médicos como los pacientes puedan manejar las citas de forma digital, sin complicaciones.
-
-### ¿Qué soluciona?
-
-**Para los médicos**: No más agendas de papel, menos pacientes que no van, mejor organización del tiempo y más ganancias.
-
-**Para los pacientes**: No más colas ni esperas, pueden reservar turnos cuando quieran, toda la info médica en un lugar.
-
-**Para las clínicas**: Todo centralizado, mejor experiencia para el usuario y menos gastos operativos.
-
 ---
 
-## Estado del Proyecto
-
-> **IMPORTANTE**: Esta es una demo funcional que muestra lo que puede hacer el sistema.
-> 
-> **Objetivo**: Ser la plataforma principal de turnos médicos en Argentina.
-
----
-
-## Tecnologías que uso
-
-### Backend y Base de Datos
-- **Node.js** - Para ejecutar JavaScript en el servidor
-- **Express.js** - Framework web para las APIs
-- **MongoDB** - Base de datos que escala bien
-- **Mongoose** - Para modelar los datos
-- **Axios** - Para hacer llamadas a APIs
-- **CORS** - Para permitir peticiones desde otros dominios
-
-### Frontend y UI
-- **React 18** - Para construir la interfaz
-- **Vite** - Empaquetador súper rápido
-- **React Router DOM v7** - Para la navegación
-- **Context API** - Para manejar el estado global
-
-### Estilos y Diseño
-- **TailwindCSS 3.4** - Framework CSS que me gusta mucho
-- **PostCSS** - Para procesar CSS
-- **Autoprefixer** - Para que funcione en todos los navegadores
-- **Lucide React** - Iconos modernos y consistentes
-
-### Notificaciones
-- **React Toastify** - Para mostrar mensajes
-- **SweetAlert2** - Alertas modales que se ven bien
-
-### Herramientas de Desarrollo
-- **ESLint** - Para que el código esté limpio
-- **PostCSS** - Para CSS más avanzado
-- **Vite** - Para desarrollo rápido
-
----
-
-## Cómo está organizado
-
-### Estructura de archivos
-```
-src/
-├── components/          # Componentes que reutilizo
-│   ├── Layout.jsx      # Layout principal
-│   ├── ProfessionalLayout.jsx  # Layout para médicos
-│   ├── ProfessionalSidebar.jsx # Barra lateral
-│   └── UserAvatar.jsx  # Avatar del usuario
-├── context/            # Estado global
-│   ├── AppointmentContext.jsx  # Contexto de citas
-│   └── UserContext.jsx         # Contexto de usuario
-├── hooks/              # Hooks personalizados
-│   └── useAppointmentContext.js # Hook para citas
-├── pages/              # Páginas principales
-└── services/           # APIs y servicios
-```
-
----
-
-## 🧪 Sistema de Testing Completo
-
-### Tests Unitarios e Integración
-- **Jest + React Testing Library** para componentes críticos
-- **Cobertura automática** con reportes detallados
-- **Tests de validación** para formularios y lógica de negocio
-- **Mocks completos** para APIs y servicios externos
-
-### Tests End-to-End (E2E)
-- **Cypress** para flujos completos de usuario
-- **Screenshots automáticos** de cada paso importante
-- **Videos opcionales** de cada test para debugging
-- **Tests de accesibilidad** y responsive design
-
-### Documentación Automática
-- **Storybook** para documentar componentes individuales
-- **Screenshots automáticos** de cada estado del componente
-- **Script de Node.js** para actualizar documentación
-- **GitHub Actions** para automatización completa
-
-### Comandos de Testing
-```bash
-# Tests unitarios
-npm run test
-npm run test:watch
-npm run test:coverage
-
-# Tests E2E
-npm run test:e2e
-npm run test:e2e:open
-npm run test:e2e:headless
-
-# Todos los tests
-npm run test:all
-
-# Storybook
-npm run storybook
-npm run build-storybook
-
-# Generar documentación completa
-npm run docs:generate
-```
-
----
-
-## Lo que ya funciona
+## Estructura
 
 ### Gestión de Usuarios
 - **Registro** con validaciones completas
@@ -441,134 +300,20 @@ npm run docs:generate
 
 ---
 
-## Diseño y UX
+## 11. Línea de Desarrollo Futura (Roadmap)
 
-### Principios que sigo
-- **Centrado en el usuario** con flujos que tengan sentido
-- **Interfaz limpia** siguiendo tendencias actuales
-- **Accesible** para todos
-- **Responsive** que funcione en cualquier dispositivo
+**Fase 1: Automatización Avanzada (Próximo Sprint)**
+- **Notificaciones Push por WhatsApp:** Integración con la API de Twilio para enviar recordatorios dinámicos de citas 24 horas antes, disminuyendo el ausentismo un 15% adicional.
+- **Pasarela de Pago de Aranceles (Copagos):** Integración con MercadoPago o Stripe para cobros inmediatos de seña y validaciones de tarjetas en tiempo real.
 
-### Colores
-- **Paleta azul** que transmite confianza médica
-- **Buen contraste** para que se lea bien
-- **Consistente** en toda la app
+**Fase 2: Inteligencia de Negocios y Optimización de Capacidad (SaaS Advanced)**
+- **Motor de Sobreturnos Inteligente:** Algoritmo predictivo de Machine Learning que asigne sobreturnos automáticamente analizando la tasa de ausentismo histórica del día de la semana y especialidad del médico.
+- **Módulo Whitelabel Premium:** Ocultamiento total de la marca de TurnosAR y uso de subdominios personalizados (`clinica.turnosar.com`) para planes Enterprise.
 
-### Responsive
-- **Mobile-first** para mejor experiencia en móvil
-- **Breakpoints optimizados** para tablets y desktop
-- **Navegación que se adapta** al dispositivo
+## 12. Autoría
 
----
+- **Desarrolladora principal:** Virginia Alejandra Ponce
+- **Tecnologías:** React 18, Node.js, Express, PostgreSQL, Playwright, Tailwind CSS.
+- **LinkedIn:** [https://www.linkedin.com/in/poncevirginialej/](https://www.linkedin.com/in/poncevirginialej/)
+- **Ubicación:** Argentina (Catamarca).
 
-## Cómo instalarlo
-
-### Requisitos
-- Node.js 18+ 
-- npm o yarn
-- MongoDB (local o Atlas)
-
-### Instalación
-```bash
-# Clonar el repo
-git clone [URL_DEL_REPO]
-
-# Instalar dependencias
-npm install
-
-# Configurar variables de entorno
-cp .env.example .env
-
-# Ejecutar en desarrollo
-npm run dev
-```
-
-### Scripts disponibles
-```bash
-npm run dev      # Servidor de desarrollo
-npm run build    # Build de producción
-npm run preview  # Preview del build
-npm run lint     # Linting del código
-```
-
----
-
-## Objetivos del sistema
-
-- **20,000+ médicos** usando TurnosAR en Argentina
-- **14,000,000+ turnos** por año
-- **10,000,000+ historias clínicas** gestionadas
-- **60% menos** ausentismo de pacientes
-- **40% más** rentabilidad del consultorio
-
----
-
-## Evolución del Proyecto
-
-### ¿Por qué cambié de Faker + mockDatabase a una API real?
-
-Al principio del desarrollo, usé **Faker.js** y una **base de datos mock** para generar datos de prueba y prototipar rápidamente. Sin embargo, después de probar el sistema, me di cuenta de que:
-
-**Faker.js no es necesario porque:**
-- Los usuarios reales usan DNI como contraseña inicial
-- No genero miles de usuarios de prueba
-- Es un sistema de turnos, no un generador de datos
-- Aumentaba el bundle size innecesariamente
-- Agregaba complejidad sin beneficio real
-
-**mockDatabase tampoco es necesario porque:**
-- Voy a usar una **mock API funcional** con json-server
-- Con Postman puedo verificar usuarios registrados
-- Los datos son persistentes entre sesiones
-- Es más realista para testing
-- No hay duplicación de datos
-
-**La solución final:**
-- **Eliminé Faker** completamente del proyecto
-- **Eliminé mockDatabase** y uso solo la API real
-- **Bundle size reducido** de 1,056 kB a 608 kB (42% menos)
-- **Arquitectura más simple** y mantenible
-- **Una sola fuente de verdad** para los datos
-
-### Próximamente
-- **App móvil** para iOS y Android
-- **Notificaciones push** avanzadas
-- **Integración con sistemas** de salud existentes
-- **API pública** para desarrolladores
-- **Sistema de pagos** integrado
-
-### Versión 2.0
-- **Inteligencia artificial** para optimizar agendas
-- **Telemedicina** con videollamadas
-- **Analytics avanzados** para médicos
-- **Integración con wearables** y dispositivos IoT
-
----
-
-## Quién lo desarrolló
-
-**Desarrollado por**: Virginia Alejandra Ponce  
-**Tecnología**: React + Node.js + MongoDB  
-**País**: Argentina
-
----
-
-## Licencia
-
-Este proyecto es una demo funcional para mostrar lo que puede hacer TurnosAR.
-
----
-
-## Contribuir
-
-Es un proyecto demo, pero las sugerencias y feedback son bienvenidos para futuras versiones.
-
----
-
-## Contacto
-
-Para más info sobre TurnosAR o consultas comerciales:
-- **Email**: codeginny@gmail.com
-- **Portfolio**: www.codeginnny.com
-- **LinkedIn**: Virginia Ponce
->>>>>>> 5ec89ef952c27f22ad3b1e353dd79d3f2acc63a4
