@@ -1,6 +1,14 @@
 require('dotenv').config({ path: require('path').join(__dirname, '.env') });
-const { query } = require('./database/config');
+const { Pool } = require('pg');
 const bcrypt = require('bcrypt');
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
+const query = (text, params) => pool.query(text, params);
 
 console.log("Conectando con URL:", process.env.DATABASE_URL);
 if (!process.env.DATABASE_URL) {
