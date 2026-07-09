@@ -106,7 +106,7 @@ async function seed() {
           const telefono = '+54 11 4456-' + Math.floor(1000 + Math.random() * 9000);
 
           const result = await query(
-            `INSERT INTO profesionales (dni, nombre, email, telefono, especialidad, clinica, provincia, ciudad, password) 
+            `INSERT INTO profesionales (cuit, nombre, email, telefono, especialidad, clinica, provincia, ciudad, password) 
              VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
              RETURNING id, nombre, especialidad, clinica, provincia`,
             [dniCounter, nombre, email, telefono, especialidad, nombreClinica, provincia, provincia, password]
@@ -125,7 +125,7 @@ async function seed() {
     const carlosPassword = await bcrypt.hash('password123', SALT_ROUNDS);
     
     const carlosResult = await query(
-      `INSERT INTO profesionales (dni, nombre, email, telefono, especialidad, clinica, provincia, ciudad, password) 
+      `INSERT INTO profesionales (cuit, nombre, email, telefono, especialidad, clinica, provincia, ciudad, password) 
        VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
        RETURNING id, nombre, especialidad, clinica, provincia, ciudad`,
       [carlosDni, 'Dr. Carlos Méndez', carlosEmail, '+54 383 412-3456', 'Cardiología', 'Sanatorio Pasteur Catamarca', 'Catamarca', 'San Fernando del Valle de Catamarca', carlosPassword]
@@ -152,7 +152,7 @@ async function seed() {
       const telefono = '+54 11 5' + Math.floor(1000000 + Math.random() * 9000000);
 
       const res = await query(
-        `INSERT INTO profesionales (dni, nombre, email, telefono, especialidad, clinica, provincia, ciudad, password) 
+        `INSERT INTO profesionales (cuit, nombre, email, telefono, especialidad, clinica, provincia, ciudad, password) 
          VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) 
          RETURNING id, nombre, especialidad, clinica, provincia`,
         [dniCounter, nombre, email, telefono, especialidad, clinicaParticular, provincia, provincia, password]
