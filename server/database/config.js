@@ -22,6 +22,5 @@ async function testConnection() {
   }
 }
 
-testConnection();
-
-module.exports = pool;
+const query = (text, params) => pool.query(text, params);
+module.exports = { pool, query };
