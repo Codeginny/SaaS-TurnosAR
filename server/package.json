@@ -7,7 +7,9 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "test": "vitest"
+    "test": "vitest",
+    "db:seed": "node seed.js",
+    "render-build": "npm install && node seed.js"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
