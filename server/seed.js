@@ -1,5 +1,11 @@
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 const { query } = require('./database/config');
 const bcrypt = require('bcrypt');
+
+console.log("Conectando con URL:", process.env.DATABASE_URL);
+if (!process.env.DATABASE_URL) {
+    throw new Error("¡DATABASE_URL no está definida en el entorno!");
+}
 
 const SALT_ROUNDS = parseInt(process.env.BCRYPT_SALT_ROUNDS) || 10;
 
