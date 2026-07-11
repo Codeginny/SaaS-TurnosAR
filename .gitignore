@@ -16,8 +16,5 @@ build/
 .env.local
 .vscode/
 .idea/
-<<<<<<< HEAD
 .pgdata/
 logfile
-=======
->>>>>>> 5ec89ef952c27f22ad3b1e353dd79d3f2acc63a4
