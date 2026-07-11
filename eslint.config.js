@@ -5,14 +5,9 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 
 export default [
   { ignores: ['dist'] },
-<<<<<<< HEAD
   // Configuración para frontend (React/Browser)
   {
     files: ['src/**/*.{js,jsx}'],
-=======
-  {
-    files: ['**/*.{js,jsx}'],
->>>>>>> 5ec89ef952c27f22ad3b1e353dd79d3f2acc63a4
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -36,7 +31,6 @@ export default [
       ],
     },
   },
-<<<<<<< HEAD
   // Configuración para backend (Node.js)
   {
     files: ['server/**/*.{js,jsx}'],
@@ -53,6 +47,4 @@ export default [
       'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
     },
   },
-=======
->>>>>>> 5ec89ef952c27f22ad3b1e353dd79d3f2acc63a4
 ]
