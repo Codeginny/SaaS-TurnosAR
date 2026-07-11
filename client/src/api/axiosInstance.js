@@ -13,7 +13,7 @@ export const backendAPI = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-  timeout: 10000,
+  timeout: 30000, // 30 segundos para cold start de Render (plan gratuito)
   withCredentials: true, // Importante para enviar cookies httpOnly
 });
 
