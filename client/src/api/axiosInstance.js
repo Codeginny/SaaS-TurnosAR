@@ -14,7 +14,6 @@ export const backendAPI = axios.create({
     'Content-Type': 'application/json',
   },
   timeout: 30000, // 30 segundos para cold start de Render (plan gratuito)
-  withCredentials: true, // Importante para enviar cookies httpOnly
 });
 
 // Interceptor para agregar JWT token automáticamente
