@@ -220,6 +220,7 @@ app.use(cors({
     'http://localhost:5173', 
     'https://tu-sitio-en-vercel.vercel.app',
     'https://turnosar.vercel.app',
+    'https://saa-s-turnos-ar.vercel.app',
     process.env.FRONTEND_URL
   ].filter(Boolean),
   credentials: true,
