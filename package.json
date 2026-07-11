@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "medsmart-data-saas",
   "version": "1.0.0",
   "description": "SaaS integral para gestión de turnos médicos con analítica de datos y seguridad avanzada.",
@@ -27,67 +26,3 @@
     "concurrently": "^8.2.2"
   }
 }
-=======
-  "name": "frontend",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "start": "node App.jsx",
-    "dev": "vite",
-    "build": "vite build",
-    "lint": "eslint .",
-    "preview": "vite preview",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage",
-    "test:e2e": "cypress run",
-    "test:e2e:open": "cypress open",
-    "test:e2e:headless": "cypress run --headless",
-    "test:all": "npm run test:coverage && npm run test:e2e:headless",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
-    "docs:generate": "node scripts/generate-docs.js"
-  },
-  "dependencies": {
-    "axios": "^1.8.4",
-    "bcryptjs": "^3.0.2",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "lucide-react": "^0.541.0",
-    "mongoose": "^8.13.2",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
-    "react-router-dom": "^7.5.0",
-    "react-toastify": "^11.0.5",
-    "sweetalert2": "^11.18.0"
-  },
-  "devDependencies": {
-    "@babel/preset-env": "^7.28.3",
-    "@babel/preset-react": "^7.27.1",
-    "@eslint/js": "^9.21.0",
-    "@storybook/addon-essentials": "^7.6.20",
-    "@storybook/addon-interactions": "^7.6.20",
-    "@storybook/addon-links": "^7.6.20",
-    "@storybook/react": "^7.6.20",
-    "@testing-library/jest-dom": "^6.8.0",
-    "@testing-library/react": "^16.3.0",
-    "@testing-library/user-event": "^14.6.1",
-    "@types/react": "^18.0.10",
-    "@types/react-dom": "^18.0.4",
-    "@vitejs/plugin-react": "^4.3.4",
-    "autoprefixer": "^10.4.21",
-    "babel-jest": "^30.1.2",
-    "cypress": "^12.17.4",
-    "eslint": "^9.21.0",
-    "eslint-plugin-react-hooks": "^5.1.0",
-    "eslint-plugin-react-refresh": "^0.4.19",
-    "globals": "^15.15.0",
-    "jest": "^30.1.2",
-    "jest-environment-jsdom": "^30.1.2",
-    "postcss": "^8.5.3",
-    "tailwindcss": "^3.4.17",
-    "vite": "^4.0.0"
-  }
-}
->>>>>>> 5ec89ef952c27f22ad3b1e353dd79d3f2acc63a4

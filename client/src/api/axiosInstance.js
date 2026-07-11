@@ -5,7 +5,7 @@ import axios from "axios";
 const isDevelopment = import.meta.env.DEV;
 
 // URL base del backend
-const BACKEND_URL = isDevelopment ? "/api" : "http://localhost:3001/api";
+const BACKEND_URL = import.meta.env.VITE_API_URL || (isDevelopment ? "/api" : "http://localhost:3001/api");
 
 // Instancia para el servidor backend (autenticación y seguridad)
 export const backendAPI = axios.create({
