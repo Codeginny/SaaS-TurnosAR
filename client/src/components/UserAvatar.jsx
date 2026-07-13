@@ -266,7 +266,7 @@ const UserAvatar = () => {
 
       {/* Menú desplegable */}
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 w-96 bg-white rounded-xl shadow-xl border border-gray-200 z-50 max-h-[80vh] overflow-y-auto">
+        <div className="absolute top-full right-0 mt-2 w-[calc(100vw-2rem)] sm:w-96 max-w-sm sm:max-w-none bg-white rounded-xl shadow-xl border border-gray-200 z-50 max-h-[80vh] overflow-y-auto">
           {/* Header del usuario */}
           <div className="p-4 border-b border-gray-100 bg-gradient-to-r from-blue-50 to-blue-100">
             <div className="flex items-center gap-3">
@@ -435,16 +435,6 @@ const UserAvatar = () => {
                       <div 
                         onClick={() => {
                           setIsOpen(false);
-                          navigate('/patient-dashboard');
-                        }}
-                        className="flex items-center gap-2 hover:bg-white p-2 rounded cursor-pointer"
-                      >
-                        <BarChart3 className="w-4 h-4 text-blue-500" />
-                        <span>Dashboard</span>
-                      </div>
-                      <div 
-                        onClick={() => {
-                          setIsOpen(false);
                           navigate('/patient-dashboard?tab=perfil');
                         }}
                         className="flex items-center gap-2 hover:bg-white p-2 rounded cursor-pointer"
@@ -456,16 +446,6 @@ const UserAvatar = () => {
                             Requerido
                           </span>
                         )}
-                      </div>
-                      <div 
-                        onClick={() => {
-                          setIsOpen(false);
-                          navigate('/patient-dashboard?tab=bancos');
-                        }}
-                        className="flex items-center gap-2 hover:bg-white p-2 rounded cursor-pointer"
-                      >
-                        <CreditCard className="w-4 h-4 text-blue-500" />
-                        <span>Información bancaria</span>
                       </div>
                     </div>
                   )}

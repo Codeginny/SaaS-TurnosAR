@@ -330,6 +330,7 @@ const loginProfessional = async (req, res) => {
  */
 // 🔐 REGISTRO DE PACIENTES
 const registerPatient = async (req, res) => {
+  console.log('--- REQ RECEIVED: registerPatient ---', req.body);
   try {
     const validationResult = registerPatientSchema.safeParse(req.body);
     
@@ -358,7 +359,7 @@ const registerPatient = async (req, res) => {
     const result = await query(
       `INSERT INTO pacientes (dni, password, debe_cambiar_clave) 
        VALUES ($1, $2, $3) 
-       RETURNING id, dni, nombre, email, telefono, debe_cambiar_clave, created_at`,
+       RETURNING *`,
       [parseInt(dni), hashedPassword, true]
     );
 
@@ -379,6 +380,7 @@ const registerPatient = async (req, res) => {
     });
 
   } catch (error) {
+    require('fs').appendFileSync('error.log', new Date().toISOString() + ' - Error en registro: ' + error.stack + '\n');
     console.error('Error en registro de paciente:', error);
     res.status(500).json({ 
       error: 'Error interno del servidor',

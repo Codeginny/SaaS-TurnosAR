@@ -61,128 +61,33 @@ const PatientLogin = () => {
     }
 
     try {
-      // 2️⃣ VERIFICAR SI EL PACIENTE YA EXISTE
-      const response = await axiosInstance.get('/pacientes');
-      const pacientes = response.data;
+      // 2️⃣ INTENTAR LOGIN
+      const response = await axiosInstance.post('/api/patient-login', {
+        dni: formData.dni,
+        password: formData.password
+      });
       
-      // Buscar el paciente por DNI
-      const pacienteEncontrado = pacientes.find(p => p.dni === parseInt(formData.dni));
-      setPaciente(pacienteEncontrado);
+      const { paciente, token } = response.data;
+      setPaciente(paciente);
       
-      if (!pacienteEncontrado) {
-        // 3️⃣ AUTO-REGISTRO: Si no existe, se registra automáticamente
-        try {
-          // Verificar que la contraseña inicial sea igual al DNI
-          if (formData.password !== formData.dni) {
-            setError('Para tu primera vez, la contraseña debe ser igual a tu DNI');
-            setLoading(false);
-            return;
-          }
-
-          // Crear paciente con el nuevo esquema de MockAPI
-          const nuevoPaciente = {
-            dni: parseInt(formData.dni),
-            password: formData.dni, // DNI como contraseña inicial
-            name: '', // Se completará en el perfil (name.fullName en MockAPI)
-            email: '',
-            phone: '', // phone.number en MockAPI
-            fechaNacimiento: new Date().toISOString().split('T')[0] // Date en MockAPI
-          };
-
-          // Limpiar datos antes de enviar a la API (solo campos esenciales)
-          const datosLimpios = DataCleanerService.cleanAutoRegistroData(nuevoPaciente);
-
-          console.log('Auto-registro - Datos a enviar:', datosLimpios);
-          console.log('Auto-registro - Endpoint:', '/pacientes');
-
-          const registroResponse = await axiosInstance.post('/pacientes', datosLimpios);
-          
-          console.log('Auto-registro - Respuesta:', registroResponse.data);
-          
-          // Crear usuario temporal y redirigir a completar perfil
-          const userData = {
-            id: registroResponse.data.id,
-            dni: nuevoPaciente.dni,
-            password: nuevoPaciente.password,
-            isPatient: true,
-            datosCompletados: false
-          };
-
-          login(userData);
-          
-          // Agregar notificación de registro exitoso
-          addRegistroNotification('Usuario');
-          
-          navigate('/patient-dashboard', { 
-            state: { 
-              mostrarCompletarPerfil: true,
-              mensaje: '¡Registro exitoso! Tu cuenta se creó automáticamente. Por favor completa tus datos personales para continuar.'
-            }
-          });
-          return;
-
-        } catch (registroError) {
-          console.error('Error en auto-registro:', registroError);
-          
-          // Manejo específico de errores de auto-registro
-          if (registroError.response) {
-            if (registroError.response.status === 400) {
-              setError('Datos inválidos para el registro. Verifica tu DNI.');
-            } else if (registroError.response.status === 409) {
-              setError('Ya existe un usuario con ese DNI. Intenta iniciar sesión.');
-            } else {
-              setError(`Error del servidor: ${registroError.response.status}. Intenta nuevamente.`);
-            }
-          } else if (registroError.request) {
-            setError('Error de conexión. Verifica tu internet e intenta nuevamente.');
-          } else {
-            setError('Error al crear la cuenta. Intenta nuevamente.');
-          }
-          
-          setLoading(false);
-          return;
-        }
-      }
-
-      // 4️⃣ LOGIN: Validar credenciales contra la API real
-      // Verificar si es la primera vez (contraseña = DNI)
-      if (SecurityService.isTemporaryPassword(formData.password, formData.dni.toString())) {
-        // Es la primera vez, verificar que la contraseña hasheada coincida con el DNI hasheado
-        const isTemporaryPasswordValid = await SecurityService.verifyPassword(formData.dni, pacienteEncontrado.password);
-        if (!isTemporaryPasswordValid) {
-          setError('Contraseña incorrecta. Si es tu primera vez, usa tu DNI como contraseña.');
-          setLoading(false);
-          return;
-        }
-      } else {
-        // No es la primera vez, verificar contraseña personalizada usando bcrypt
-        const isPasswordValid = await SecurityService.verifyPassword(formData.password, pacienteEncontrado.password);
-        if (!isPasswordValid) {
-          setError('Contraseña incorrecta. Si es tu primera vez, usa tu DNI como contraseña.');
-          setLoading(false);
-          return;
-        }
-      }
-
-      // 5️⃣ LOGIN EXITOSO: Crear objeto de usuario
-      const tieneDatosCompletos = pacienteEncontrado.name && 
-                                  pacienteEncontrado.name.trim() && 
-                                  pacienteEncontrado.email && 
-                                  pacienteEncontrado.email.trim() && 
-                                  pacienteEncontrado.phone && 
-                                  pacienteEncontrado.phone.trim();
+      // Guardar token en localStorage (si tu auth flow lo requiere, asumo que sí porque interceptor lo usa)
+      if (token) localStorage.setItem('token', token);
+      const tieneDatosCompletos = paciente.nombre && 
+                                  paciente.nombre.trim() && 
+                                  paciente.email && 
+                                  paciente.email.trim() && 
+                                  paciente.telefono && 
+                                  paciente.telefono.trim();
 
       const userData = {
-        id: pacienteEncontrado.id,
-        nombre: pacienteEncontrado.name || '',
-        dni: pacienteEncontrado.dni,
-        email: pacienteEncontrado.email || '',
-        telefono: pacienteEncontrado.phone || '',
-        fecha: pacienteEncontrado.fecha || '',
-        hora: pacienteEncontrado.hora || '',
-        estado: pacienteEncontrado.estado || '',
-        profesional: pacienteEncontrado.profesional || '',
+        id: paciente.id,
+        nombre: paciente.nombre || '',
+        dni: paciente.dni,
+        email: paciente.email || '',
+        telefono: paciente.telefono || '',
+        fechaNacimiento: paciente.fechaNacimiento || '',
         isPatient: true,
+        debe_cambiar_clave: paciente.debe_cambiar_clave,
         datosCompletados: tieneDatosCompletos
       };
 
@@ -192,7 +97,7 @@ const PatientLogin = () => {
       if (tieneDatosCompletos) {
         navigate('/patient-dashboard', { 
           state: { 
-            mensaje: `¡Bienvenido de vuelta ${pacienteEncontrado.nombre}! Tus datos están completos.`
+            mensaje: `¡Bienvenido de vuelta ${paciente.nombre}! Tus datos están completos.`
           }
         });
       } else {
@@ -207,7 +112,55 @@ const PatientLogin = () => {
 
     } catch (error) {
       console.error('Error en login:', error);
-      setError('Error al conectar con el servidor. Intenta nuevamente.');
+      
+      // Si el error es 401 y dice que no existe el paciente, Hacemos AUTO-REGISTRO
+      if (error.response && error.response.status === 401 && error.response.data.error === 'No existe un paciente con ese DNI') {
+        try {
+          if (formData.password !== formData.dni) {
+            setError('Para tu primera vez, la contraseña debe ser igual a tu DNI');
+            setLoading(false);
+            return;
+          }
+
+          const registroResponse = await axiosInstance.post('/api/patient-register', {
+            dni: formData.dni,
+            password: formData.password
+          });
+          
+          const { paciente: nuevoPaciente, token } = registroResponse.data;
+          setPaciente(nuevoPaciente);
+          if (token) localStorage.setItem('token', token);
+          
+          const userData = {
+            id: nuevoPaciente.id,
+            dni: nuevoPaciente.dni,
+            isPatient: true,
+            datosCompletados: false,
+            debe_cambiar_clave: true
+          };
+
+          login(userData);
+          addRegistroNotification('Usuario');
+          
+          navigate('/patient-dashboard', { 
+            state: { 
+              mostrarCompletarPerfil: true,
+              mensaje: '¡Registro exitoso! Tu cuenta se creó automáticamente. Por favor completa tus datos personales para continuar.'
+            }
+          });
+          return;
+          
+        } catch (registroError) {
+          console.error('Error en auto-registro:', registroError);
+          setError(registroError.response?.data?.error || 'Error al crear la cuenta. Intenta nuevamente.');
+          setLoading(false);
+          return;
+        }
+      } else if (error.response && error.response.status === 401) {
+        setError('Contraseña incorrecta. Si es tu primera vez, usa tu DNI como contraseña.');
+      } else {
+        setError('Error al conectar con el servidor. Intenta nuevamente.');
+      }
     } finally {
       setLoading(false);
     }
@@ -243,7 +196,7 @@ const PatientLogin = () => {
       const hashedNewPassword = await SecurityService.hashPassword(newPassword);
       
       // Actualizar la contraseña en la base de datos
-      await axiosInstance.put(`/pacientes/${paciente.id}`, {
+      await axiosInstance.put(`/api/patient-change-password/${paciente.id}`, {
         ...paciente,
         password: hashedNewPassword
       });

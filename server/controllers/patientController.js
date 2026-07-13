@@ -81,7 +81,7 @@ const updatePatient = async (req, res) => {
         alergias = $11,
         updated_at = CURRENT_TIMESTAMP
       WHERE id = $12
-      RETURNING id, dni, nombre, email, telefono, obra_social, direccion, provincia, localidad, codigo_postal, grupo_sangre, enfermedades, alergias, debe_cambiar_clave, estado, created_at, updated_at`,
+      RETURNING *`,
       [nombre, email, telefono, obraSocial, direccion, provincia, localidad, codigoPostal, grupoSangre, enfermedades, alergias, parseInt(id)]
     );
 
@@ -134,7 +134,7 @@ const getPatient = async (req, res) => {
     }
     
     const result = await query(
-      'SELECT id, dni, nombre, email, telefono, obra_social, direccion, provincia, localidad, codigo_postal, grupo_sangre, enfermedades, alergias, debe_cambiar_clave, estado, created_at, updated_at FROM pacientes WHERE id = $1',
+      'SELECT * FROM pacientes WHERE id = $1',
       [parseInt(id)]
     );
 

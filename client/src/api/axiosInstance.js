@@ -30,6 +30,19 @@ backendAPI.interceptors.request.use(
   }
 );
 
+// Rutas donde un 401 es una respuesta ESPERADA (login fallido, registro, etc.)
+// y NO debe disparar el refresh-token ni redirigir al Home.
+const PUBLIC_AUTH_ENDPOINTS = [
+  "/patient-login",
+  "/patient-register",
+  "/login",
+  "/register"
+];
+
+function isPublicAuthEndpoint(url = "") {
+  return PUBLIC_AUTH_ENDPOINTS.some((endpoint) => url.includes(endpoint));
+}
+
 // Interceptor para manejar errores de autenticación
 let isRefreshing = false;
 let failedQueue = [];
@@ -49,21 +62,21 @@ backendAPI.interceptors.response.use(
   (response) => response,
   async (error) => {
     const originalRequest = error.config;
+    const status = error.response?.status;
 
-    // Solo intentar refresh si:
-    // 1. Es un error 401
-    // 2. No es el endpoint de refresh-token
-    // 3. La solicitud original tenía un token (es decir, era una solicitud autenticada)
-    if (error.response?.status === 401 && 
-        !originalRequest._retry && 
-        !originalRequest.url?.includes('/refresh-token') &&
-        originalRequest.headers?.Authorization) {
+    // Si es 401 en login/register, dejamos pasar el error tal cual,
+    // sin refresh, sin redirect. El componente lo maneja normal.
+    if (status === 401 && isPublicAuthEndpoint(originalRequest?.url)) {
+      return Promise.reject(error);
+    }
+
+    // --- Lógica normal de refresh token para el resto de rutas ---
+    if (status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
-        // Si ya estamos refrescando, agregar a la cola
-        return new Promise((resolve, reject) => {
+        return new Promise(function(resolve, reject) {
           failedQueue.push({ resolve, reject });
         }).then(token => {
-          originalRequest.headers.Authorization = `Bearer ${token}`;
+          originalRequest.headers['Authorization'] = 'Bearer ' + token;
           return backendAPI(originalRequest);
         }).catch(err => {
           return Promise.reject(err);
@@ -74,22 +87,15 @@ backendAPI.interceptors.response.use(
       isRefreshing = true;
 
       try {
-        // Intentar renovar el token usando el refresh token de la cookie
         const response = await backendAPI.post('/refresh-token');
+        const { token } = response.data;
         
-        if (response.data.token) {
-          const newToken = response.data.token;
-          localStorage.setItem('token', newToken);
-          
-          // Actualizar el header de la solicitud original
-          originalRequest.headers.Authorization = `Bearer ${newToken}`;
-          
-          // Procesar la cola de solicitudes pendientes
-          processQueue(null, newToken);
-          
-          // Reintentar la solicitud original
-          return backendAPI(originalRequest);
-        }
+        localStorage.setItem('token', token);
+        backendAPI.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+        originalRequest.headers['Authorization'] = 'Bearer ' + token;
+        
+        processQueue(null, token);
+        return backendAPI(originalRequest);
       } catch (refreshError) {
         // Error al renovar el token - limpiar estado
         processQueue(refreshError, null);
@@ -100,7 +106,7 @@ backendAPI.interceptors.response.use(
       } finally {
         isRefreshing = false;
       }
-    } else if (error.response?.status === 401 && !originalRequest.url?.includes('/login')) {
+    } else if (status === 401) {
       // Es un 401 pero no podemos/debemos reintentar. Limpiar y redirigir.
       localStorage.removeItem('token');
       localStorage.removeItem('user');

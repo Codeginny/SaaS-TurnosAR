@@ -78,7 +78,7 @@ const MedicalProfileForm = ({ pacienteId, onComplete, onCancel }) => {
       });
       
       // Actualizar paciente en la API
-      await axiosInstance.put(`/pacientes/${pacienteId}`, datosLimpios);
+      await axiosInstance.put(`/api/patient/${pacienteId}`, datosLimpios);
       
       // Notificar completado
       onComplete();

@@ -27,7 +27,7 @@ import NotFound from './pages/NotFound';
 // Nuevas páginas
 import About from './pages/About.jsx';
 import AppPage from './pages/App.jsx';
-import Awards from './pages/Awards.jsx';
+
 
 // Páginas profesionales
 import PersonalInfo from './pages/professional/PersonalInfo.jsx';
@@ -67,7 +67,7 @@ function App() {
           {/* Nuevas rutas */}
           <Route path="/acerca-de" element={<About />} />
           <Route path="/app" element={<AppPage />} />
-          <Route path="/premios" element={<Awards />} />
+
           
           {/* Rutas profesionales con layout específico */}
           <Route path="/professional" element={<ProfessionalLayout />}>

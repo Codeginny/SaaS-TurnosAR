@@ -54,6 +54,7 @@ const PatientLogin = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (loading) return; // PREVENT DOUBLE SUBMIT
     setLoading(true);
     setError('');
 

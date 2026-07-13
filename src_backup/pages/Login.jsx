@@ -75,7 +75,7 @@ const Login = () => {
 
     try {
       // Buscar el profesional en la base de datos
-      const response = await axiosInstance.get('/profesionales');
+      const response = await axiosInstance.get('/api/profesionales');
       const profesionales = response.data;
       
       // Buscar el profesional por DNI (convertir a número para comparar)
@@ -180,7 +180,7 @@ const Login = () => {
         // IMPORTANTE: Hashear la nueva contraseña antes de enviarla
         const hashedPassword = await SecurityService.hashPassword(fullFormData.password);
         
-        await axiosInstance.put(`/profesionales/${profesional.id}`, {
+        await axiosInstance.put(`/api/profesionales/${profesional.id}`, {
           ...profesional,
           password: hashedPassword
         });
@@ -210,7 +210,7 @@ const Login = () => {
           password: hashedPassword // La contraseña hasheada
         });
         
-        const response = await axiosInstance.post('/profesionales', datosLimpios);
+        const response = await axiosInstance.post('/api/register', datosLimpios);
         
         if (response.data && response.data.id) {
           const userData = {

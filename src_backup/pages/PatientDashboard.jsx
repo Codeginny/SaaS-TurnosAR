@@ -283,41 +283,37 @@ const PatientTurnos = () => {
   const cargarTurnos = async () => {
     setLoadingTurnos(true);
     try {
-      // Intentar cargar desde /turnos primero
+      // Cargar turnos del paciente autenticado desde la API
+      const pacienteId = user?.id;
+      if (pacienteId) {
+        try {
+          const response = await axiosInstance.get(`/api/turnos/paciente/${pacienteId}`);
+          if (response.data && Array.isArray(response.data)) {
+            setTurnos(response.data);
+            return;
+          }
+        } catch (turnoError) {
+          console.log('Endpoint /api/turnos/paciente no disponible, intentando fallback');
+        }
+      }
+
+      // Fallback: cargar todos los turnos y filtrar
       try {
-        const response = await axiosInstance.get('/turnos');
+        const response = await axiosInstance.get('/api/turnos');
         if (response.data && Array.isArray(response.data)) {
-          // Filtrar turnos del paciente actual (por DNI o email)
           const turnosPaciente = response.data.filter(turno => 
-            turno.pacienteId === '123' || 
-            turno.email === userData.email ||
-            turno.dni === userData.dni
+            turno.pacienteId === (user?.id || '123') || 
+            (userData.email && turno.email === userData.email) ||
+            (userData.dni && String(turno.dni) === String(userData.dni))
           );
           setTurnos(turnosPaciente);
           return;
         }
       } catch (turnoError) {
-        console.log('Endpoint /turnos no disponible, intentando cargar desde /pacientes');
+        console.log('Endpoint /api/turnos no disponible');
       }
 
-      // Si no hay /turnos, cargar desde /pacientes
-      try {
-        const response = await axiosInstance.get('/pacientes');
-        if (response.data && Array.isArray(response.data)) {
-          // Filtrar registros que tengan fecha y hora (son turnos)
-          const turnosPaciente = response.data.filter(paciente => 
-            paciente.fecha && 
-            paciente.hora && 
-            paciente.fecha !== 'pendiente' && 
-            paciente.hora !== 'pendiente' &&
-            (paciente.email === userData.email || paciente.dni === userData.dni)
-          );
-          setTurnos(turnosPaciente);
-        }
-      } catch (pacienteError) {
-        console.log('No se pudieron cargar los turnos desde /pacientes');
-        setTurnos([]);
-      }
+      setTurnos([]);
     } catch (error) {
       console.error('Error al cargar turnos:', error);
       setTurnos([]);
@@ -362,7 +358,7 @@ const PatientTurnos = () => {
 
   // Cargar datos del usuario desde el contexto al montar el componente
   useEffect(() => {
-    if (user && user.nombre) {
+    if (user) {
       setUserData(prev => ({
         ...prev,
         nombre: user.nombre || '',
@@ -442,18 +438,18 @@ const PatientTurnos = () => {
     try {
       // Intentar cancelar en /turnos primero
       try {
-        await axiosInstance.put(`/turnos/${turnoACancelar.id}`, {
+        await axiosInstance.put(`/api/turnos/${turnoACancelar.id}`, {
           ...turnoACancelar,
           estado: 'cancelado',
           fechaCancelacion: new Date().toISOString()
         });
       } catch (turnoError) {
-        console.log('Endpoint /turnos no disponible, intentando cancelar en /pacientes');
+        console.log('Endpoint /api/turnos no disponible, intentando cancelar en /api/pacientes');
       }
 
       // Si no hay /turnos, cancelar en /pacientes
       try {
-        await axiosInstance.put(`/pacientes/${turnoACancelar.id}`, {
+        await axiosInstance.put(`/api/pacientes/${turnoACancelar.id}`, {
           ...turnoACancelar,
           estado: 'cancelado',
           fechaCancelacion: new Date().toISOString()
@@ -653,12 +649,12 @@ const PatientTurnos = () => {
       try {
         const turnoData = {
           ...formData,
-          pacienteId: '123', // ID del paciente logueado
+          pacienteId: user?.id || '123', // ID del paciente logueado
           estado: 'confirmado',
           fechaCreacion: new Date().toISOString()
         };
 
-        const response = await axiosInstance.post('/turnos', turnoData);
+        const response = await axiosInstance.post('/api/turnos', turnoData);
         if (response.data) {
           turnoGuardado = true;
         }
@@ -674,6 +670,8 @@ const PatientTurnos = () => {
             nombre: userData.nombre || 'Paciente',
             email: userData.email || 'email@ejemplo.com',
             telefono: userData.telefono || 'Sin teléfono',
+            dni: userData.dni,
+            pacienteId: user?.id,
             fecha: formData.fecha,
             hora: formData.hora,
             estado: 'confirmado',
@@ -684,7 +682,7 @@ const PatientTurnos = () => {
             createdAt: Date.now()
           };
 
-          const response = await axiosInstance.post('/pacientes', nuevoTurno);
+          const response = await axiosInstance.post('/api/pacientes', nuevoTurno);
           if (response.data) {
             console.log('Turno guardado exitosamente en /pacientes:', response.data);
             turnoGuardado = true;
@@ -745,7 +743,8 @@ const PatientTurnos = () => {
     try {
       // Intentar actualizar en /pacientes
       try {
-        const response = await axiosInstance.put(`/pacientes/1`, {
+        const pacienteId = user?.id || 1;
+        const response = await axiosInstance.put(`/api/patient/${pacienteId}`, {
           ...userData,
           fechaActualizacion: new Date().toISOString()
         });
@@ -764,7 +763,7 @@ const PatientTurnos = () => {
             createdAt: Date.now()
           };
           
-          const response = await axiosInstance.post('/pacientes', nuevoPaciente);
+          const response = await axiosInstance.post('/api/patient-register', nuevoPaciente);
           console.log('Nuevo paciente creado en /pacientes:', response.data);
         } catch (createError) {
           console.log('No se pudo crear en /pacientes, usando simulación');

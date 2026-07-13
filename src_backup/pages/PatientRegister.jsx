@@ -128,14 +128,9 @@ const PatientRegister = () => {
       // Intentar primero en /pacientes, si falla, usar /usuarios
       let response;
       try {
-        response = await axiosInstance.post('/pacientes', datosLimpios);
+        response = await axiosInstance.post('/api/patient-register', datosLimpios);
       } catch (error) {
-        if (error.response && error.response.status === 404) {
-          // Si /pacientes no existe, intentar en /usuarios
-          response = await axiosInstance.post('/usuarios', datosLimpios);
-        } else {
-          throw error;
-        }
+        throw error;
       }
       
       console.log('Respuesta del servidor:', response.data);

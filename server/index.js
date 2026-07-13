@@ -6,11 +6,55 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
-const { query } = require('./database/config');
+const path = require('path');
+const { query, pool } = require('./database/config');
 const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const { authenticateToken, authorize } = require('./middleware/authMiddleware');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
+
+// Configurar variables de entorno
+const envPath = path.join(__dirname, '.env');
+console.log('Ruta del .env en index.js:', envPath);
+dotenv.config({ path: envPath });
+
+async function autoMigrate() {
+  try {
+    await pool.query(`
+      ALTER TABLE pacientes 
+      ADD COLUMN IF NOT EXISTS debe_cambiar_clave BOOLEAN DEFAULT false,
+      ADD COLUMN IF NOT EXISTS obra_social VARCHAR(100),
+      ADD COLUMN IF NOT EXISTS direccion VARCHAR(200),
+      ADD COLUMN IF NOT EXISTS provincia VARCHAR(100),
+      ADD COLUMN IF NOT EXISTS localidad VARCHAR(100),
+      ADD COLUMN IF NOT EXISTS codigo_postal VARCHAR(20),
+      ADD COLUMN IF NOT EXISTS grupo_sangre VARCHAR(10),
+      ADD COLUMN IF NOT EXISTS enfermedades TEXT,
+      ADD COLUMN IF NOT EXISTS alergias TEXT,
+      ADD COLUMN IF NOT EXISTS estado VARCHAR(20) DEFAULT 'activo',
+      ADD COLUMN IF NOT EXISTS updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ADD COLUMN IF NOT EXISTS created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+    `);
+    console.log('✅ Esquema de base de datos sincronizado automáticamente');
+  } catch (err) {
+    console.error('❌ Error al sincronizar esquema:', err);
+  }
+}
+
+// Probar conexión a la base de datos
+pool.query('SELECT NOW()', async (err, res) => {
+  if (err) {
+    console.error('❌ Error al conectar a PostgreSQL:', err.message);
+    if (err.message.includes('password authentication failed')) {
+      console.error('➡️ Verifica la contraseña en tu archivo .env');
+    }
+  } else {
+    console.log('✅ Conexión a PostgreSQL verificada:', { now: res.rows[0].now });
+    await autoMigrate();
+  }
+});
+
+// Inicializar la aplicación Express (movido hacia abajo)
 
 // Importar controladores
 const {

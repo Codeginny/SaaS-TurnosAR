@@ -19,7 +19,7 @@ export const UserProvider = ({ children }) => {
     if (userData) {
       try {
         const parsedUser = JSON.parse(userData);
-        if (parsedUser && parsedUser.nombre && parsedUser.email) {
+        if (parsedUser) {
           setUser(parsedUser);
         }
       } catch (error) {

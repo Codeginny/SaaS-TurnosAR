@@ -89,7 +89,7 @@ const Register = () => {
       };
       
       // Guardar en MockAPI /profesionales
-      const response = await axiosInstance.post('/profesionales', formToSend);
+      const response = await axiosInstance.post('/api/register', formToSend);
       
       // Validar que la respuesta tenga los datos necesarios
       if (response.data && response.data.id) {
