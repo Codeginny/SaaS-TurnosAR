@@ -1,5 +1,8 @@
 # TurnosAR SaaS — Gestión de Consultorios, Facturación ARCA/AFIP y Business Intelligence Médico
 
+<img width="782" height="886" alt="Captura desde 2026-07-11 21-23-36" src="https://github.com/user-attachments/assets/9a3ad98d-fb55-4059-aa1c-7fa6a15e2fe8" />
+
+
 ## 1. Descripción del Sistema y Propósito de Negocio
 
 TurnosAR es una solución de software como servicio (SaaS) multi-tenant de alto rendimiento y robustez transaccional diseñada específicamente para clínicas y consultorios independientes de salud en la República Argentina. El sistema migra la gestión tradicional de agendas de un modelo analógico hacia un ecosistema digital de Inteligencia de Negocios (BI), optimizando la capacidad instalada, reduciendo la tasa de inasistencias (No-Shows) y automatizando la simulación de facturación fiscal.
@@ -10,6 +13,11 @@ TurnosAR es una solución de software como servicio (SaaS) multi-tenant de alto 
 - **Optimización de Capacidad Operativa:** Matriz y heatmap de ocupación histórica para identificar y redistribuir turnos en "horas muertas" o de baja demanda.
 - **Maximización del Ticket Promedio:** Análisis cruzado de aranceles particulares vs. convenios de obras sociales y prepagas para balancear la mezcla de facturación.
 - **Aislamiento de Datos en Entornos Corporativos (Sec-01):** Prevención absoluta de fugas de datos entre inquilinos mediante un estricto aislamiento de base de datos multi-tenant a nivel de consultas SQL.
+
+
+<img width="569" height="898" alt="Captura desde 2026-07-12 23-40-40" src="https://github.com/user-attachments/assets/5fd65561-e9fb-47b6-b8fa-711441f815c6" />
+
+
 
 ## 2. Decisiones de Arquitectura y Tecnologías (Tech Stack)
 
@@ -90,6 +98,9 @@ Los datos de la interfaz están matemáticamente unificados para eliminar cualqu
 - **Tasa de Ausentismo Operativo:** Mide la eficiencia y pérdida por citas no asistidas:
   `Tasa de Ausentismo = (Turnos Cancelados Tardíamente / Total de Turnos Reservados) * 100`
 - **Segmentación de Coberturas:** Distribución proporcional entre Obras Sociales, Prepagas (Flujo de liquidación diferido a 30/60 días) y consultas Particulares (Ingreso de caja directo inmediato).
+
+<img width="829" height="840" alt="Captura desde 2026-07-12 23-40-15" src="https://github.com/user-attachments/assets/82eeb6ab-629b-4924-a2a4-797c767597f6" />
+
 
 ## 6. Estructura de la Base de Datos (Esquema PostgreSQL)
 
@@ -204,6 +215,10 @@ Para revisar e interactuar con el Dashboard totalmente poblado con métricas din
 - **Rol:** professional
 - **Contexto de demostración:** 90 turnos históricos distribuidos en 2026, con heatmap de capacidad activa, ingresos consolidados y módulo de facturación disponible para "Completar y Emitir CAE" sobre los pacientes de la lista de Julio de 2026.
 
+
+<img width="1411" height="893" alt="Captura desde 2026-07-11 21-27-17" src="https://github.com/user-attachments/assets/774f0ab5-61f7-42c7-a374-b39cf7074ddb" />
+
+
 ## 10. Plan de Despliegue de Costo Fijo (Producción)
 
 Para garantizar un margen de rentabilidad óptimo en un entorno SaaS real, se evita el uso de infraestructuras serverless con costos variables de consumo. Se utiliza un modelo de despliegue sobre un Servidor Privado Virtual (VPS) administrado con contenedores de Docker mediante el panel de control Docploy:
@@ -274,6 +289,9 @@ Para garantizar un margen de rentabilidad óptimo en un entorno SaaS real, se ev
 - **Sistema de alertas** para confirmaciones
 
 ---
+
+<img width="789" height="861" alt="Captura desde 2026-07-12 23-43-36" src="https://github.com/user-attachments/assets/5dfbdb84-790e-4f1b-b6b8-620f2eb0d907" />
+
 
 ## Rutas del sistema
 
