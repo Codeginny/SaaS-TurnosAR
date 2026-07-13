@@ -336,7 +336,7 @@ DB_HOST=localhost
 DB_PORT=5432
 DB_NAME=turnosar_db
 DB_USER=postgres
-DB_PASSWORD=secure_password
+DB_PASSWORD=[TU_CONTRASEÑA_SEGURA]
 
 # Configuración de seguridad
 BCRYPT_SALT_ROUNDS=10
@@ -350,7 +350,7 @@ const dbConfig = {
   user: process.env.DB_USER || 'postgres',
   host: process.env.DB_HOST || 'localhost',
   database: process.env.DB_NAME || 'turnosar_db',
-  password: process.env.DB_PASSWORD || 'password',
+  password: process.env.DB_PASSWORD || '[TU_CONTRASEÑA_LOCAL]',
   port: process.env.DB_PORT || 5432,
   max: 20, // Máximo de conexiones en el pool
   idleTimeoutMillis: 30000,
@@ -460,4 +460,4 @@ La migración a PostgreSQL con Bcrypt representa un salto cualitativo en:
 
 *Documento actualizado el 13 de octubre de 2024*  
 *Versión: 2.0.0*  
-*Autor: Sistema TurnosAR Development Team*
+*Autor: Sistema TurnosAR Development Team, Virginia Alejandra Ponce (LinkedIn: https://www.linkedin.com/in/poncevirginialej/)*
