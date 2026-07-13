@@ -458,6 +458,6 @@ La migración a PostgreSQL con Bcrypt representa un salto cualitativo en:
 
 ---
 
-*Documento actualizado el 13 de octubre de 2024*  
+*Documento actualizado el 13 de Julio de 2026*  
 *Versión: 2.0.0*  
-*Autor: Sistema TurnosAR Development Team, Virginia Alejandra Ponce (LinkedIn: https://www.linkedin.com/in/poncevirginialej/)*
+*Autor: Virginia Alejandra Ponce (LinkedIn: https://www.linkedin.com/in/poncevirginialej/)*

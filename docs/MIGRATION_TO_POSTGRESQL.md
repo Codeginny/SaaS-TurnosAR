@@ -370,6 +370,6 @@ La migración a PostgreSQL representa un salto cualitativo en:
 
 ---
 
-*Documento creado el 13 de octubre de 2024*
+*Documento actualizado el 13 de Julio de 2026*
 *Versión: 1.0*
-*Autor: Sistema TurnosAR Development Team*
+*Autor: Virginia Alejandra Ponce (LinkedIn: https://www.linkedin.com/in/poncevirginialej/)*

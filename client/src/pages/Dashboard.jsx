@@ -710,7 +710,7 @@ const Dashboard = () => {
                 <div className="bg-white dark:bg-slate-800 rounded-xl shadow-sm p-4">
                   <div className="flex items-center justify-between">
                     <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-                      📊 Período de Análisis
+                      Período de Análisis
                     </h3>
                     <div className="flex gap-2">
                       {['hoy', 'semana', 'mes', 'año'].map((period) => (
