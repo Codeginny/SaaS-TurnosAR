@@ -1,6 +1,12 @@
 # TurnosAR SaaS — Gestión de Consultorios, Facturación ARCA/AFIP y Business Intelligence Médico
 
-<img width="782" height="886" alt="Captura desde 2026-07-11 21-23-36" src="https://github.com/user-attachments/assets/32df8522-aed5-4133-bc4f-218d33468362" />
+<p align="center">
+  <a href="https://app.supademo.com/demo/cmrkpnail17wlqmvwixpfvjzm?utm_source=link">
+    <img width="782" height="886" alt="Presiona aquí para ver la demo interactiva" src="https://github.com/user-attachments/assets/32df8522-aed5-4133-bc4f-218d33468362" />
+    <br>
+    <strong>👉 Presiona aquí para ver la demo interactiva</strong>
+  </a>
+</p>
 
 
 
