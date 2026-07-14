@@ -15,8 +15,7 @@ TurnosAR es una solución de software como servicio (SaaS) multi-tenant de alto 
 - **Maximización del Ticket Promedio:** Análisis cruzado de aranceles particulares vs. convenios de obras sociales y prepagas para balancear la mezcla de facturación.
 - **Aislamiento de Datos en Entornos Corporativos (Sec-01):** Prevención absoluta de fugas de datos entre inquilinos mediante un estricto aislamiento de base de datos multi-tenant a nivel de consultas SQL.
 
-
-<img width="569" height="898" alt="Captura desde 2026-07-12 23-40-40" src="https://github.com/user-attachments/assets/5fd65561-e9fb-47b6-b8fa-711441f815c6" />
+<img width="554" height="806" alt="Captura desde 2026-07-12 23-38-53" src="https://github.com/user-attachments/assets/54a48ea3-4e40-43f2-89fc-681964890f4c" />
 
 
 
@@ -326,6 +325,8 @@ Para garantizar un margen de rentabilidad óptimo en un entorno SaaS real, se ev
 | `/prueba-gratis` | Prueba gratis | Público |
 
 ---
+
+<img width="562" height="837" alt="Captura desde 2026-07-12 23-39-06" src="https://github.com/user-attachments/assets/94cc3aa6-acf6-4a95-bd3c-cf299c2dde4e" />
 
 ## 11. Línea de Desarrollo Futura (Roadmap)
 
