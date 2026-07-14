@@ -1,6 +1,6 @@
 # TurnosAR SaaS — Gestión de Consultorios, Facturación ARCA/AFIP y Business Intelligence Médico
 
-<img width="782" height="886" alt="Captura desde 2026-07-11 21-23-36" src="https://github.com/user-attachments/assets/9a3ad98d-fb55-4059-aa1c-7fa6a15e2fe8" />
+<img width="1374" height="879" alt="Captura desde 2026-07-14 09-13-43" src="https://github.com/user-attachments/assets/e7261ff7-89a9-4627-881f-9280cbfaa2ad" />
 
 
 ## 1. Descripción del Sistema y Propósito de Negocio
