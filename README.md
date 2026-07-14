@@ -1,6 +1,7 @@
 # TurnosAR SaaS — Gestión de Consultorios, Facturación ARCA/AFIP y Business Intelligence Médico
 
-<img width="1374" height="879" alt="Captura desde 2026-07-14 09-13-43" src="https://github.com/user-attachments/assets/e7261ff7-89a9-4627-881f-9280cbfaa2ad" />
+<img width="782" height="886" alt="Captura desde 2026-07-11 21-23-36" src="https://github.com/user-attachments/assets/32df8522-aed5-4133-bc4f-218d33468362" />
+
 
 
 ## 1. Descripción del Sistema y Propósito de Negocio
@@ -85,7 +86,7 @@ La plataforma integra un simulador del servicio web oficial de facturación (WSF
 - **Impresión de Alta Fidelidad (PDF):** Utilización de hojas de estilo `@media print` que formatean la factura a tamaño A4 para ser impresa físicamente o guardada directamente como PDF mediante el cuadro nativo del navegador, sin el costo de procesamiento de librerías del lado del servidor.
 
 
-<img width="383" height="755" alt="Captura desde 2026-07-14 10-14-43" src="https://github.com/user-attachments/assets/faa3cf61-d83b-4fa6-9750-4337d48b795b" />
+<img width="1374" height="879" alt="Captura desde 2026-07-14 09-13-43" src="https://github.com/user-attachments/assets/e7261ff7-89a9-4627-881f-9280cbfaa2ad" />
 
 
 ### 5.2 Motor de Exportación de Datos en Streaming (Business Intelligence)
