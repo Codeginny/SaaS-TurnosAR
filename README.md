@@ -84,11 +84,19 @@ La plataforma integra un simulador del servicio web oficial de facturación (WSF
 - **Generación de Factura C:** Renderizado de un modal que emula de forma idéntica el comprobante fiscal tipo C con su correspondiente código QR ficticio de validación y la codificación de ley "011".
 - **Impresión de Alta Fidelidad (PDF):** Utilización de hojas de estilo `@media print` que formatean la factura a tamaño A4 para ser impresa físicamente o guardada directamente como PDF mediante el cuadro nativo del navegador, sin el costo de procesamiento de librerías del lado del servidor.
 
+
+<img width="383" height="755" alt="Captura desde 2026-07-14 10-14-43" src="https://github.com/user-attachments/assets/faa3cf61-d83b-4fa6-9750-4337d48b795b" />
+
+
 ### 5.2 Motor de Exportación de Datos en Streaming (Business Intelligence)
 
 La exportación analítica de la base de datos está blindada contra desbordamientos de memoria del servidor:
 - **Arquitectura de Streams:** Uso de `pg-query-stream` en el backend. Los registros se leen y transmiten secuencialmente de forma asíncrona hacia el cliente en formato CSV, manteniendo constante y plano el uso de memoria RAM en el servidor, ideal para consultas que superan los 10,000 turnos.
 - **Enmascaramiento de Datos (PII Protection):** En cumplimiento de las regulaciones de protección de datos médicos, el DNI de los pacientes es enmascarado automáticamente en la exportación mediante un algoritmo de backend antes de ser transmitido (ej: `34567890` -> `34***890`).
+
+
+<img width="619" height="364" alt="Captura desde 2026-07-14 09-15-55" src="https://github.com/user-attachments/assets/8dc9b7f5-5470-49b3-a532-4205f8672341" />
+
 
 ### 5.3 Consistencia de Métricas Financieras
 
